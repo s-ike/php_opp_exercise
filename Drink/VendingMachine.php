@@ -3,11 +3,11 @@ namespace Drink;
 
 class VendingMachine
 {
-    private $stock_of_coke;        // コーラの在庫数
-    private $stock_of_dietcoke;    // ダイエットコーラの在庫数
-    private $stock_of_tea;         // お茶の在庫数
-    private $stock_of_100yen;       // 100円玉の在庫
-    private $change;               // お釣り
+    private $stock_of_coke;     // コーラの在庫数
+    private $stock_of_dietcoke; // ダイエットコーラの在庫数
+    private $stock_of_tea;      // お茶の在庫数
+    private $stock_of_100yen;   // 100円玉の在庫
+    private $change;            // お釣り
 
     public function __construct()
     {
@@ -31,50 +31,44 @@ class VendingMachine
     public function buy(Coin $payment, DrinkType $kind_of_drink) :?Drink
     {
         // 100円と500円だけ受け付ける
-        if (($payment->getType() !== Coin::ONE_HUNDRED)
-        && ($payment->getType() !== Coin::FIVE_HUNDRED)) {
+        if ((! $payment->typeEquals(Coin::ONE_HUNDRED))
+        && (! $payment->typeEquals(Coin::FIVE_HUNDRED))) {
             $this->change->add($payment);
             return null;
         }
 
-        if (($kind_of_drink->getType() === DrinkType::COKE)
-        && ($this->stock_of_coke->getQuantity() === 0)) {
+        if (($kind_of_drink->typeEquals(DrinkType::COKE))
+        && ($this->stock_of_coke->isEmpty())) {
             $this->change->add($payment);
             return null;
-        } elseif (($kind_of_drink->getType() === DrinkType::DIET_COKE)
-        && ($this->stock_of_dietcoke->getQuantity() === 0)) {
+        } elseif (($kind_of_drink->typeEquals(DrinkType::DIET_COKE))
+        && ($this->stock_of_dietcoke->isEmpty())) {
             $this->change->add($payment);
             return null;
-        } elseif (($kind_of_drink->getType() === DrinkType::TEA)
-        && ($this->stock_of_tea->getQuantity() === 0)) {
+        } elseif (($kind_of_drink->typeEquals(DrinkType::TEA))
+        && ($this->stock_of_tea->isEmpty())) {
             $this->change->add($payment);
             return null;
         }
 
         // 釣り銭不足
-        if ($payment->getType() === Coin::FIVE_HUNDRED
-        && $this->stock_of_100yen->getNumberOf100yen() < 4) {
+        if ($payment->typeEquals(Coin::FIVE_HUNDRED)
+        && $this->stock_of_100yen->isSmallNumberOf100yen(4)) {
             $this->change->add($payment);
             return null;
         }
 
-        if ($payment->getType() === Coin::ONE_HUNDRED) {
+        if ($payment->typeEquals(Coin::ONE_HUNDRED)) {
             // 100円玉を釣り銭に使える
             $this->stock_of_100yen->add($payment);
-        } elseif ($payment->getType() === Coin::FIVE_HUNDRED) {
+        } elseif ($payment->typeEquals(Coin::FIVE_HUNDRED)) {
             // 400円のお釣り
-            $count = (Coin::FIVE_HUNDRED - Coin::ONE_HUNDRED) / Coin::ONE_HUNDRED;
-            $change = new Coin(Coin::ONE_HUNDRED, $count);
-            $this->change->add($change);
-            // 100円玉を釣り銭に使える
-            for ($i = 0; $i < $count; $i++) {
-                $this->stock_of_100yen->reduceOne100yen();
-            }
+            $this->change->add($this->stock_of_100yen->takeOutChange());
         }
 
-        if ($kind_of_drink->getType() === DrinkType::COKE) {
+        if ($kind_of_drink->typeEquals(DrinkType::COKE)) {
             $this->stock_of_coke->decrement();
-        } elseif ($kind_of_drink->getType() === DrinkType::DIET_COKE) {
+        } elseif ($kind_of_drink->typeEquals(DrinkType::DIET_COKE)) {
             $this->stock_of_dietcoke->decrement();
         } else {
             $this->stock_of_tea->decrement();
@@ -87,12 +81,12 @@ class VendingMachine
     /**
      * お釣りを取り出す.
      *
-     * @return int お釣りの金額
+     * @return Money お釣りのお金クラス
      */
-    public function refund() :int
+    public function refund() :Money
     {
-        $result = $this->change->getAmount();
+        $money = $this->change->toMoney();
         $this->change->clear();
-        return $result;
+        return $money;
     }
 }

@@ -14,8 +14,27 @@ class DrinkType
         $this->type = $type;
     }
 
-    public function getType() :int
+    public function typeEquals(int $type)
     {
-        return $this->type;
+        return $this->type === $type;
+    }
+
+    public function getDrinkName() :string
+    {
+        $result = '';
+        switch ($this->type) {
+            case self::COKE:
+                $result = 'コーラ';
+                break;
+
+            case self::DIET_COKE:
+                $result = 'ダイエットコーラ';
+                break;
+
+            case self::TEA:
+                $result = 'お茶';
+                break;
+        }
+        return $result;
     }
 }

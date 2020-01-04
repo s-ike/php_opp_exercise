@@ -25,22 +25,22 @@ class StockOfCoin
 
     public function add(Coin $coin) :void
     {
-        if ($coin->getType() === Coin::ONE_HUNDRED) {
+        if ($coin->typeEquals(Coin::ONE_HUNDRED)) {
             $this->number_of_100yen += $coin->getNumber();
         }
-        if ($coin->getType() === Coin::FIVE_HUNDRED) {
+        if ($coin->typeEquals(Coin::FIVE_HUNDRED)) {
             $this->number_of_500yen += $coin->getNumber();
         }
     }
 
-    public function getNumberOf100yen() :int
+    public function isSmallNumberOf100yen(int $num) :bool
     {
-        return $this->number_of_100yen;
+        return $this->number_of_100yen < $num;
     }
 
-    public function getNumberOf500yen() :int
+    public function isSmallNumberOf500yen(int $num) :bool
     {
-        return $this->number_of_500yen;
+        return $this->number_of_500yen < $num;
     }
 
     public function reduceOne100yen() :void
@@ -51,5 +51,19 @@ class StockOfCoin
     public function reduceOne500yen() :void
     {
         $this->number_of_500yen--;
+    }
+
+    public function takeOutChange() :?Coin
+    {
+        $count = (Coin::FIVE_HUNDRED - Coin::ONE_HUNDRED) / Coin::ONE_HUNDRED;
+        if ($this->isSmallNumberOf100yen($count)) {
+            return null;
+        } else {
+            $change = new Coin(Coin::ONE_HUNDRED, $count);
+            for ($i = 0; $i < $count; $i++) {
+                $this->reduceOne100yen();
+            }
+            return $change;
+        }
     }
 }

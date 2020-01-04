@@ -10,9 +10,9 @@ class StockOfDrink
         $this->quantity = $quantity;
     }
 
-    public function getQuantity() :int
+    public function isEmpty() :bool
     {
-        return $this->quantity;
+        return $this->quantity === 0;
     }
 
     public function decrement() :void

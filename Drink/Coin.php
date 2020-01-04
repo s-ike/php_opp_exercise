@@ -20,18 +20,18 @@ class Coin
         $this->number += $number;
     }
 
-    public function getNumber() :int
+    public function typeEquals(int $type)
+    {
+        return $this->type === $type;
+    }
+
+    public function getNumber()
     {
         return $this->number;
     }
 
-    public function getType() :int
+    public function toMoney() :Money
     {
-        return $this->type;
-    }
-
-    public function getAmount() :int
-    {
-        return $this->type * $this->number;
+        return new Money($this->type * $this->number);
     }
 }

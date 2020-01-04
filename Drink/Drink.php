@@ -3,15 +3,15 @@ namespace Drink;
 
 class Drink
 {
-    private $kind;
+    private $drink_type;
 
     public function __construct(DrinkType $drink_type)
     {
-        $this->kind = $drink_type->getType();
+        $this->drink_type = $drink_type;
     }
 
-    public function getKind() :int
+    public function getDrinkName() :string
     {
-        return $this->kind;
+        return $this->drink_type->getDrinkName();
     }
 }

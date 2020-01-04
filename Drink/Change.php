@@ -15,11 +15,11 @@ class Change
         $this->coins[] = $coin;
     }
 
-    public function getAmount() :int
+    public function toMoney() :Money
     {
-        $result = 0;
+        $result = new Money(0);
         foreach ($this->coins as $coin) {
-            $result += $coin->getAmount();
+            $result->add($coin->toMoney());
         }
         return $result;
     }
