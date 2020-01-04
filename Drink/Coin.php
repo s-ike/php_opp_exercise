@@ -25,6 +25,16 @@ class Coin
         return $this->type === $type;
     }
 
+    public function is100yen() :bool
+    {
+        return $this->type === Coin::ONE_HUNDRED;
+    }
+
+    public function is500yen() :bool
+    {
+        return $this->type === Coin::FIVE_HUNDRED;
+    }
+
     public function getNumber()
     {
         return $this->number;

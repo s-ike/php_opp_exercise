@@ -17,6 +17,11 @@ class StockOfDrink
 
     public function decrement() :void
     {
-        $this->$quantity--;
+        $this->quantity = --$this->quantity;
+    }
+
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
 }

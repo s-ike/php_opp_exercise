@@ -1,7 +1,7 @@
 <?php
 namespace Drink;
 
-class StockOfCoin
+class CashBox
 {
     private static $instance = null;
     private $number_of_500yen = 0;
@@ -19,16 +19,16 @@ class StockOfCoin
         if (self::$instance) {
             return self::$instance;
         }
-        self::$instance = new StockOfCoin($coins);
+        self::$instance = new CashBox($coins);
         return self::$instance;
     }
 
     public function add(Coin $coin) :void
     {
-        if ($coin->typeEquals(Coin::ONE_HUNDRED)) {
+        if ($coin->is100yen()) {
             $this->number_of_100yen += $coin->getNumber();
         }
-        if ($coin->typeEquals(Coin::FIVE_HUNDRED)) {
+        if ($coin->is500yen()) {
             $this->number_of_500yen += $coin->getNumber();
         }
     }

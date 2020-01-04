@@ -37,4 +37,9 @@ class DrinkType
         }
         return $result;
     }
+
+    public function getType()
+    {
+        return $this->type;
+    }
 }
