@@ -3,18 +3,14 @@ namespace Drink;
 
 class Drink
 {
-    public static $COKE = 0;
-    public static $DIET_COKE = 1;
-    public static $TEA = 2;
-
     private $kind;
 
-    public function drink(int $kind)
+    public function __construct(DrinkType $drink_type)
     {
-        $this->kind = $kind;
+        $this->kind = $drink_type->getType();
     }
 
-    public function getKind()
+    public function getKind() :int
     {
         return $this->kind;
     }
