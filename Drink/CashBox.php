@@ -58,12 +58,11 @@ class CashBox
         $count = (Coin::FIVE_HUNDRED - Coin::ONE_HUNDRED) / Coin::ONE_HUNDRED;
         if ($this->isSmallNumberOf100yen($count)) {
             return null;
-        } else {
-            $change = new Coin(Coin::ONE_HUNDRED, $count);
-            for ($i = 0; $i < $count; $i++) {
-                $this->reduceOne100yen();
-            }
-            return $change;
         }
+        $change = new Coin(Coin::ONE_HUNDRED, $count);
+        for ($i = 0; $i < $count; $i++) {
+            $this->reduceOne100yen();
+        }
+        return $change;
     }
 }

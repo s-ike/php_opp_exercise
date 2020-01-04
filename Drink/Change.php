@@ -10,7 +10,7 @@ class Change
         $this->coins = [];
     }
 
-    public function add(Coin $coin)
+    public function add(Coin $coin) :void
     {
         $this->coins[] = $coin;
     }
@@ -24,7 +24,7 @@ class Change
         return $result;
     }
 
-    public function clear()
+    public function clear() :void
     {
         $this->coins = [];
     }
