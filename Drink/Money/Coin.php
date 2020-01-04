@@ -1,5 +1,5 @@
 <?php
-namespace Drink;
+namespace Drink\Money;
 
 class Coin
 {
@@ -15,12 +15,12 @@ class Coin
         $this->number = $number;
     }
 
-    public function addNumber(int $number)
+    public function addNumber(int $number) :void
     {
         $this->number += $number;
     }
 
-    public function typeEquals(int $type)
+    public function typeEquals(int $type) :bool
     {
         return $this->type === $type;
     }
@@ -35,7 +35,7 @@ class Coin
         return $this->type === Coin::FIVE_HUNDRED;
     }
 
-    public function getNumber()
+    public function getNumber() :int
     {
         return $this->number;
     }

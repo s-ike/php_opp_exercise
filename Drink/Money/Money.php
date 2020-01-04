@@ -1,5 +1,5 @@
 <?php
-namespace Drink;
+namespace Drink\Money;
 
 class Money
 {
@@ -15,7 +15,7 @@ class Money
         return $this->amount;
     }
 
-    public function add(Money $money)
+    public function add(Money $money) :void
     {
         $this->amount += $money->getAmount();
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Drink;
+namespace Drink\Money;
 
 class CoinMech
 {

@@ -1,5 +1,8 @@
 <?php
-namespace Drink;
+namespace Drink\Stock;
+
+use Drink\Drink\Drink;
+use Drink\Drink\DrinkType;
 
 class Storage
 {
@@ -26,7 +29,7 @@ class Storage
         return $type ?: null;
     }
 
-    public function takeOut(DrinkType $drink_type)
+    public function takeOut(DrinkType $drink_type) :?Drink
     {
         if (! $stock = $this->findStock($drink_type)) {
             return null;
@@ -38,7 +41,7 @@ class Storage
         return new Drink($drink_type);
     }
 
-    public function getStockQuantity(DrinkType $drink_type)
+    public function getStockQuantity(DrinkType $drink_type) :int
     {
         $stock = $stock = $this->findStock($drink_type);
         return $stock->getQuantity();

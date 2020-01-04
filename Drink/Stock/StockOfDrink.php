@@ -1,5 +1,5 @@
 <?php
-namespace Drink;
+namespace Drink\Stock;
 
 class StockOfDrink
 {
@@ -20,7 +20,7 @@ class StockOfDrink
         $this->quantity = --$this->quantity;
     }
 
-    public function getQuantity()
+    public function getQuantity() :int
     {
         return $this->quantity;
     }

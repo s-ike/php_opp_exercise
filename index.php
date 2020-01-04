@@ -1,6 +1,6 @@
 <?php
-use Drink\Coin;
-use Drink\DrinkType;
+use Drink\Money\Coin;
+use Drink\Drink\DrinkType;
 use Drink\VendingMachine;
 
 require_once __DIR__.'/vendor/autoload.php';

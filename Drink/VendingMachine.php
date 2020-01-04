@@ -1,6 +1,13 @@
 <?php
 namespace Drink;
 
+use Drink\Money\Coin;
+use Drink\Drink\Drink;
+use Drink\Money\Money;
+use Drink\Stock\Storage;
+use Drink\Money\CoinMech;
+use Drink\Drink\DrinkType;
+
 class VendingMachine
 {
     private $storage;
