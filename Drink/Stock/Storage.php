@@ -41,9 +41,9 @@ class Storage
         return new Drink($drink_type);
     }
 
-    public function getStockQuantity(DrinkType $drink_type) :int
+    public function getStockQuantity(DrinkType $drink_type) :Quantity
     {
-        $stock = $stock = $this->findStock($drink_type);
+        $stock = $this->findStock($drink_type);
         return $stock->getQuantity();
     }
 }

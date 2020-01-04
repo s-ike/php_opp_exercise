@@ -7,20 +7,21 @@ class StockOfDrink
 
     public function __construct(int $quantity)
     {
-        $this->quantity = $quantity;
+        $this->quantity = new Quantity($quantity);
     }
 
     public function isEmpty() :bool
     {
-        return $this->quantity === 0;
+        return $this->quantity->getAmount() === 0;
     }
 
     public function decrement() :void
     {
-        $this->quantity = --$this->quantity;
+        $one = new Quantity(1);
+        $this->quantity->reduce($one);
     }
 
-    public function getQuantity() :int
+    public function getQuantity() :Quantity
     {
         return $this->quantity;
     }

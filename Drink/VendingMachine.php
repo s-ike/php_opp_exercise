@@ -6,6 +6,7 @@ use Drink\Drink\Drink;
 use Drink\Money\Money;
 use Drink\Stock\Storage;
 use Drink\Money\CoinMech;
+use Drink\Stock\Quantity;
 use Drink\Drink\DrinkType;
 
 class VendingMachine
@@ -61,7 +62,7 @@ class VendingMachine
      *
      * @return int
      */
-    public function getStockQuantity(DrinkType $drink_type) :int
+    public function getStockQuantity(DrinkType $drink_type) :Quantity
     {
         return $this->storage->getStockQuantity($drink_type);
     }

@@ -16,7 +16,7 @@ echo '<br>'.PHP_EOL;
 $refund = $vending_machine->refund();
 echo sprintf('お釣り: %s', $refund->toString()), PHP_EOL;
 
-echo sprintf('購入前在庫: %s', $stock), PHP_EOL;
+echo sprintf('購入前在庫: %s', $stock->toString()), PHP_EOL;
 
 $stock = $vending_machine->getStockQuantity($type);
-echo sprintf('購入後在庫: %s', $stock), PHP_EOL;
+echo sprintf('購入後在庫: %s', $stock->toString()), PHP_EOL;
